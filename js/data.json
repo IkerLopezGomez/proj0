@@ -9,7 +9,7 @@
           "Prohibit estacionar"
         ],
         "resposta_correcta": 0,
-        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta0.jpeg"
+        "imatge": "media/pregunta0.jpeg"
       },
       {
         "id": 2,
@@ -20,7 +20,7 @@
           "60 km/h"
         ],
         "resposta_correcta": 1,
-        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta1.jpeg"
+        "imatge": "media/pregunta1.jpeg"
       },
       {
         "id": 3,
@@ -31,7 +31,7 @@
           "0,0 g/l"
         ],
         "resposta_correcta": 1,
-        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta2.jpeg"
+        "imatge": "media/pregunta2.jpeg"
       },
       {
         "id": 4,
@@ -42,7 +42,7 @@
           "Cedir el pas als vianants que hi travessen"
         ],
         "resposta_correcta": 2,
-        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta3.jpeg"
+        "imatge": "media/pregunta3.jpeg"
       },
       {
         "id": 5,
@@ -53,7 +53,7 @@
           "Perill per animals en llibertat"
         ],
         "resposta_correcta": 0,
-        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta4.png"
+        "imatge": "media/pregunta4.png"
       },
       {
         "id": 6,
@@ -64,7 +64,7 @@
           "Quan circules per una carretera secundària"
         ],
         "resposta_correcta": 0,
-        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta5.jpeg"
+        "imatge": "media/pregunta5.jpeg"
       },
       {
         "id": 7,
@@ -75,7 +75,7 @@
           "Obligació de girar a la dreta"
         ],
         "resposta_correcta": 2,
-        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta6.jpeg"
+        "imatge": "media/pregunta6.jpeg"
       },
       {
         "id": 8,
@@ -86,7 +86,7 @@
           "Que has d’extremar la precaució i passar si la via és lliure"
         ],
         "resposta_correcta": 2,
-        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta7.jpeg"
+        "imatge": "media/pregunta7.jpeg"
       },
       {
         "id": 9,
@@ -97,7 +97,7 @@
           "Uns 90 metres"
         ],
         "resposta_correcta": 0,
-        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta8.jpeg"
+        "imatge": "media/pregunta8.jpeg"
       },
       {
         "id": 10,
@@ -108,7 +108,7 @@
           "Fi de prohibició d’estacionar"
         ],
         "resposta_correcta": 1,
-        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta9.png"
+        "imatge": "media/pregunta9.png"
       }
     ]  
   

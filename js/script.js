@@ -31,7 +31,7 @@ function renderJuego(data){
         htmlString += `<h3> ${data.preguntes[i].pregunta} </h3>`;
         htmlString += `<img src = "${data.preguntes[i].imatge}" alt = "imatge pregunta ${i + 1}"> <br>`;
         for (let j = 0; j < data.preguntes[i].respostes.length; j++){
-            htmlString += `<button onclick = "marcarRespuesta(${i},${j})">
+            htmlString += `<button onclick = "marcarResposta(${i},${j})">
                 ${data.preguntes[i].respostes[j]}
             </button>`;
         }
