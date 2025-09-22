@@ -31,7 +31,11 @@ function renderJuego(data){
     for (let i = 0; i < data.preguntes.length; i++) {
         console.log(data.preguntes[i].imatge)
         htmlString += `<h3> ${data.preguntes[i].pregunta} </h3>`;
-        htmlString += `<img src = "${data.preguntes[i].imatge}" alt = "imatge pregunta ${i + 1}"> <br>`;
+       htmlString += `<img src="${data.preguntes[i].imatge}" 
+                   alt="imagen pregunta ${i + 1}" 
+                   class="img-fluid d-block mx-auto" 
+                   style="max-width:30%;"> <br>`;
+
         for (let j = 0; j < data.preguntes[i].respostes.length; j++){
             htmlString += `<button onclick = "marcarRespuesta(${i},${j})">
                 ${data.preguntes[i].respostes[j]}
