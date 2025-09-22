@@ -15,6 +15,10 @@ function marcarRespuesta(numPregunta, numRespuesta){
     console.log("Pregunta " + numPregunta + " Resposta " + numRespuesta);
     if (estatPartida.respostesUsuari[numPregunta] === undefined) {
         estatPartida.contadorPreguntas++;
+        if(estatPartida.contadorPreguntas == 10){
+            alert("Has completat el qüestionari!");
+            document.getElementById ("btnFinal").style.display = "block";
+        }
     }
     estatPartida.respostesUsuari[numPregunta] = numRespuesta;
     console.log(estatPartida);
@@ -37,13 +41,14 @@ function renderJuego(data){
                    style="max-width:30%;"> <br>`;
 
         for (let j = 0; j < data.preguntes[i].respostes.length; j++){
-           htmlString += `<button type="button" class="btn btn-outline-secondary btn-sm mb-2 d-block" onclick="marcarRespuesta(${i},${j})">
+           htmlString += `<button type="button" id = "btnFinal" class="btn btn-outline-secondary btn-sm mb-2 d-block" onclick="marcarRespuesta(${i},${j})">
             ${data.preguntes[i].respostes[j]}
             </button>`;
 
         }
         actualizarMarcador();
     }
+    htmlString +='<br> <button type ="input" class = "btn btn-success" style = "display: none;" onclick = "enviarEstado()">Enviar Respostes</button>';
     contenidor.innerHTML = htmlString;
 }
 
@@ -53,3 +58,16 @@ window.addEventListener('DOMContentLoaded', (event) =>{
         .then(data => renderJuego(data))
     }
     );
+function enviarEstado(){
+    const url = "recogida.php";
+    fecth (url,{
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            contadorPreguntas: estatPartida.contadorPreguntas,
+            respostesUsuari: estatPartida.respostesUsuari
+        })
+    })
+    .then(response => response.json())
+    .then(data => console.log("JSON ->", data));
+}
