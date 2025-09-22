@@ -1,0 +1,115 @@
+{
+    "preguntes": [
+      {
+        "id": 1,
+        "pregunta": "Què indica aquest senyal de trànsit?",
+        "respostes": [
+          "Prohibit girar a l'esquerra",
+          "Prohibit avançar",
+          "Prohibit estacionar"
+        ],
+        "resposta_correcta": 0,
+        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta0.jpeg"
+      },
+      {
+        "id": 2,
+        "pregunta": "Quina és la velocitat màxima permesa en una via urbana si no hi ha senyals?",
+        "respostes": [
+          "50 km/h",
+          "30 km/h",
+          "60 km/h"
+        ],
+        "resposta_correcta": 1,
+        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta1.jpeg"
+      },
+      {
+        "id": 3,
+        "pregunta": "Quina és la taxa màxima d’alcohol en sang per a conductors novells (menys de 2 anys de carnet)?",
+        "respostes": [
+          "0,5 g/l",
+          "0,3 g/l",
+          "0,0 g/l"
+        ],
+        "resposta_correcta": 1,
+        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta2.jpeg"
+      },
+      {
+        "id": 4,
+        "pregunta": "Quan et creues amb un pas de vianants sense semàfor, què has de fer?",
+        "respostes": [
+          "Mantenir la velocitat si no hi ha vianants",
+          "Aturar-te sempre",
+          "Cedir el pas als vianants que hi travessen"
+        ],
+        "resposta_correcta": 2,
+        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta3.jpeg"
+      },
+      {
+        "id": 5,
+        "pregunta": "Quin significat té aquest senyal triangular?",
+        "respostes": [
+          "Perill per corba perillosa a la dreta",
+          "Perill per intersecció",
+          "Perill per animals en llibertat"
+        ],
+        "resposta_correcta": 0,
+        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta4.png"
+      },
+      {
+        "id": 6,
+        "pregunta": "En quina situació està permès utilitzar el telèfon mòbil mentre condueixes?",
+        "respostes": [
+          "Amb mans lliures correctament instal·lat",
+          "Quan estàs en un semàfor en vermell",
+          "Quan circules per una carretera secundària"
+        ],
+        "resposta_correcta": 0,
+        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta5.jpeg"
+      },
+      {
+        "id": 7,
+        "pregunta": "Què indica aquest senyal blau rodó?",
+        "respostes": [
+          "Obligació de girar a l'esquerra",
+          "Obligació de continuar recte",
+          "Obligació de girar a la dreta"
+        ],
+        "resposta_correcta": 2,
+        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta6.jpeg"
+      },
+      {
+        "id": 8,
+        "pregunta": "Si un semàfor està amb llum groga intermitent, què significa?",
+        "respostes": [
+          "Que pots passar sempre sense mirar",
+          "Que tens preferència de pas",
+          "Que has d’extremar la precaució i passar si la via és lliure"
+        ],
+        "resposta_correcta": 2,
+        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta7.jpeg"
+      },
+      {
+        "id": 9,
+        "pregunta": "Quina és la distància mínima de seguretat recomanada amb el vehicle del davant a 90 km/h?",
+        "respostes": [
+          "Uns 50 metres",
+          "Uns 25 metres",
+          "Uns 90 metres"
+        ],
+        "resposta_correcta": 0,
+        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta8.jpeg"
+      },
+      {
+        "id": 10,
+        "pregunta": "Què significa aquest senyal?",
+        "respostes": [
+          "Zona d’estacionament regulat",
+          "Aparcament permès",
+          "Fi de prohibició d’estacionar"
+        ],
+        "resposta_correcta": 1,
+        "imatge": "http://a24ikelopgom.daw.inspedralbes.cat/proj0/media/pregunta9.png"
+      }
+    ]  
+  
+}
