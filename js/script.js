@@ -37,9 +37,10 @@ function renderJuego(data){
                    style="max-width:30%;"> <br>`;
 
         for (let j = 0; j < data.preguntes[i].respostes.length; j++){
-            htmlString += `<button onclick = "marcarRespuesta(${i},${j})">
-                ${data.preguntes[i].respostes[j]}
+           htmlString += `<button type="button" class="btn btn-outline-secondary btn-sm mb-2 d-block" onclick="marcarRespuesta(${i},${j})">
+            ${data.preguntes[i].respostes[j]}
             </button>`;
+
         }
         actualizarMarcador();
     }
