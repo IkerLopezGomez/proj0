@@ -5,7 +5,7 @@ let estatPartida = {
 
 function actualizarMarcador(){
     let marcador = document.getElementById("marcador");
-    marcador.innerHTML = `Pregunta ${estatPartida.contadorPreguntas} Respostes ${estatPartida.respostesUsuari}`
+    marcador.innerHTML = `Pregunta ${estatPartida.contadorPreguntas}`
 }
 window.actualizarMarcador = actualizarMarcador;
 
@@ -13,10 +13,12 @@ window.actualizarMarcador = actualizarMarcador;
 function marcarRespuesta(numPregunta, numRespuesta){
 
     console.log("Pregunta " + numPregunta + " Resposta " + numRespuesta);
-    estatPartida.contadorPreguntas++;
+    if (estatPartida.respostesUsuari[numPregunta] === undefined) {
+        estatPartida.contadorPreguntas++;
+    }
     estatPartida.respostesUsuari[numPregunta] = numRespuesta;
     console.log(estatPartida);
-    actualizarMarcador;
+    actualizarMarcador();
 }
 window.marcarRespuesta = marcarRespuesta;
 
@@ -31,10 +33,11 @@ function renderJuego(data){
         htmlString += `<h3> ${data.preguntes[i].pregunta} </h3>`;
         htmlString += `<img src = "${data.preguntes[i].imatge}" alt = "imatge pregunta ${i + 1}"> <br>`;
         for (let j = 0; j < data.preguntes[i].respostes.length; j++){
-            htmlString += `<button onclick = "marcarResposta(${i},${j})">
+            htmlString += `<button onclick = "marcarRespuesta(${i},${j})">
                 ${data.preguntes[i].respostes[j]}
             </button>`;
         }
+        actualizarMarcador();
     }
     contenidor.innerHTML = htmlString;
 }
