@@ -5,7 +5,7 @@ let estatPartida = {
 
 function actualizarMarcador(){
     let marcador = document.getElementById("marcador");
-    marcador.innerHTML = `Pregunta ${estatPartida.contadorPreguntas}`
+    marcador.innerHTML = `Pregunta ${estatPartida.contadorPreguntas + 1}`
 }
 window.actualizarMarcador = actualizarMarcador;
 
