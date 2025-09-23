@@ -16,10 +16,9 @@ function marcarRespuesta(numPregunta, numRespuesta){
     if (estatPartida.respostesUsuari[numPregunta] === undefined) {
         estatPartida.contadorPreguntas++;
         if(estatPartida.contadorPreguntas == 10){
-            alert("Has completat el qüestionari!");
             document.getElementById ("btnEnviar").style.display = "block";
         }
-    }
+    }   
     estatPartida.respostesUsuari[numPregunta] = numRespuesta;
     console.log(estatPartida);
     actualizarMarcador();
