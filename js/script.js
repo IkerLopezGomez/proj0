@@ -17,7 +17,7 @@ function marcarRespuesta(numPregunta, numRespuesta){
         estatPartida.contadorPreguntas++;
         if(estatPartida.contadorPreguntas == 10){
             alert("Has completat el qüestionari!");
-            document.getElementById ("btnFinal").style.display = "block";
+            document.getElementById ("btnEnviar").style.display = "block";
         }
     }
     estatPartida.respostesUsuari[numPregunta] = numRespuesta;
@@ -48,7 +48,7 @@ function renderJuego(data){
         }
         actualizarMarcador();
     }
-    htmlString +='<br> <button type ="input" class = "btn btn-success" style = "display: none;" onclick = "enviarEstado()">Enviar Respostes</button>';
+    htmlString+=`<button id="btnEnviar" onclick="enviarEstat()" class="btn btn-danger"  style="display:none" >Enviar Respuestas</button>`
     contenidor.innerHTML = htmlString;
 }
 
@@ -58,9 +58,9 @@ window.addEventListener('DOMContentLoaded', (event) =>{
         .then(data => renderJuego(data))
     }
     );
-function enviarEstado(){
+function enviarEstat(){
     const url = "recogida.php";
-    fecth (url,{
+    fetch (url,{
         method: 'POST',
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
