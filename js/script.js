@@ -43,21 +43,12 @@ function renderJuego(data){
            htmlString += `<button type="button" id = "btnFinal" class="btn btn-outline-secondary btn-sm mb-2 d-block" onclick="marcarRespuesta(${i},${j})">
             ${data.preguntes[i].respostes[j]}
             </button>`;
-
         }
         actualizarMarcador();
     }
-    htmlString+=`<button id="btnEnviar" onclick="enviarEstat()" class="btn btn-danger"  style="display:none" >Enviar Respuestas</button>`
+    htmlString+=`<button id="btnEnviar"  class="btn btn-danger"  style="display:none" >Enviar Respuestas</button>`
     contenidor.innerHTML = htmlString;
-}
-
-window.addEventListener('DOMContentLoaded', (event) =>{
-    fetch('js/data.json')
-        .then(response => response.json())
-        .then(data => renderJuego(data))
-    }
-    );
-function enviarEstat(){
+    document.getElementById("btnEnviar").addEventListener("click", function(){
     const url = "recogida.php";
     fetch (url,{
         method: 'POST',
@@ -69,4 +60,12 @@ function enviarEstat(){
     })
     .then(response => response.json())
     .then(data => console.log("JSON ->", data));
+    });
 }
+
+window.addEventListener('DOMContentLoaded', (event) =>{
+    fetch('js/data.json')
+        .then(response => response.json())
+        .then(data => renderJuego(data))
+    }
+    );
