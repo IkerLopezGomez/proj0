@@ -40,12 +40,18 @@ function renderJuego(data){
                    style="max-width:30%;"> <br>`;
 
         for (let j = 0; j < data.preguntes[i].respostes.length; j++){
-           htmlString += `<button type="button" id = "btnFinal" class="btn btn-outline-secondary btn-sm mb-2 d-block" onclick="marcarRespuesta(${i},${j})">
+           htmlString += `<button preg = "${i}" resp = "${j}" id = "btnFinal" class="btn btn-outline-secondary btn-sm mb-2 d-block">
             ${data.preguntes[i].respostes[j]}
             </button>`;
         }
         actualizarMarcador();
     }
+    contenidor.addEventListener("click", function(e){
+        if (e.target.classList.contains("btn")) {
+            e.target.getAttribute("resp");
+            marcarRespuesta(e.target.getAttribute("preg"), e.target.getAttribute("resp"));
+        }
+    });
     htmlString+=`<button id="btnEnviar"  class="btn btn-danger"  style="display:none" >Enviar Respuestas</button>`
     contenidor.innerHTML = htmlString;
     document.getElementById("btnEnviar").addEventListener("click", function(){
