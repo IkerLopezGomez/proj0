@@ -14,6 +14,13 @@ function actualizarMarcador(){
 }
 window.actualizarMarcador = actualizarMarcador;
 
+idTimer = setInterval(function(){
+    if (estatPartida.tempsRestant > 0){
+        estatPartida.tempsRestant--;
+    }
+    actualizarMarcador();
+})
+
 
 function marcarRespuesta(numPregunta, numRespuesta){
 
