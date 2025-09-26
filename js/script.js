@@ -6,6 +6,11 @@ let estatPartida = {
 function actualizarMarcador(){
     let marcador = document.getElementById("marcador");
     marcador.innerHTML = `Pregunta ${estatPartida.contadorPreguntas + 1}`
+    for (let i = 0; i < estatPartida.respostesUsuari.length; i++) {
+        htmlString += `Pregunta ${i} : <span class = 'badge text-bg-primary'> 
+        ${(estatPartida.respostesUsuari[i] == undefined ? "O" : "X")}
+         </span> <br>`;
+    }
 }
 window.actualizarMarcador = actualizarMarcador;
 
@@ -23,6 +28,8 @@ function marcarRespuesta(numPregunta, numRespuesta){
     console.log(estatPartida);
     actualizarMarcador();
 }
+
+localStorage.setItem("partida", JSON.stringify(estatPartida));
 window.marcarRespuesta = marcarRespuesta;
 
 function renderJuego(data){
@@ -70,6 +77,10 @@ function renderJuego(data){
 }
 
 window.addEventListener('DOMContentLoaded', (event) =>{
+    if(localStorage.partida){
+        estatPartida = JSON.parse(localStorage.getItem("partida"));
+        actualizarMarcador();
+    }
     fetch('js/data.json')
         .then(response => response.json())
         .then(data => renderJuego(data))
