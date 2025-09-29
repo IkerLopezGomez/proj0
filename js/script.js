@@ -14,13 +14,6 @@ function actualizarMarcador(){
 }
 window.actualizarMarcador = actualizarMarcador;
 
-idTimer = setInterval(function(){
-    if (estatPartida.tempsRestant > 0){
-        estatPartida.tempsRestant--;
-    }
-    actualizarMarcador();
-})
-
 
 function marcarRespuesta(numPregunta, numRespuesta){
 
@@ -92,4 +85,4 @@ window.addEventListener('DOMContentLoaded', (event) =>{
         .then(response => response.json())
         .then(data => renderJuego(data))
     }
-    );
+);
