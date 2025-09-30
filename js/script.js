@@ -86,6 +86,11 @@ function renderJuego(data) {
         })
             .then(res => res.json())
             .then(res => console.log(res));
+            estatPartida.contadorPreguntas = 0;
+            estatPartida.respostesUsuari = [];
+            estatPartida.temps = 0;
+            actualizarMarcador();
+            document.getElementById("btnEnviar").style.display = "none";
     });
 }
 
