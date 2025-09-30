@@ -12,7 +12,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
 function actualizarMarcador() {
     let marcador = document.getElementById("marcador");
-    let htmlString = `Tiempo: ${estatPartida.temps}<br>`;
+    let minutos = Math.floor(estatPartida.temps / 60);
+    let segundos = estatPartida.temps % 60;
+    let tiempoMin = 
+        String(minutos).padStart(2, '0') + ':' +
+        String(segundos).padStart(2, '0');
+    let htmlString = `Tiempo: ${tiempoMin}<br>`;
     htmlString += `Pregunta ${estatPartida.contadorPreguntas + 1}<br>`;
     for (let i = 0; i < estatPartida.respostesUsuari.length; i++) {
         htmlString += `Pregunta ${i + 1} : <span class='badge text-bg-primary'>
