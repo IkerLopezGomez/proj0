@@ -27,6 +27,10 @@ function actualizarMarcador() {
         ${(estatPartida.respostesUsuari[i] ? "X" : "O")}</span><br>`;
     }
     marcador.innerHTML = htmlString;
+    localStorage.setItem("Partida", JSON.stringify(estatPartida));
+    if(estatPartida.contadorPreguntas >= 10) {
+        document.getElementById("btnEnviar").style.display = "block";
+    }
 }
 
 function marcarRespuesta(numPregunta, numRespuesta, data) {
@@ -118,11 +122,18 @@ function renderJuego(data) {
             actualizarMarcador();
             document.getElementById("btnEnviar").style.display = "none";
             let marcador = document.getElementById("marcador");
+            localStorage.removeItem("Partida");
     });
 };
 
 window.addEventListener('DOMContentLoaded', () => {
     fetch('php/getPregunta.php')
         .then(res => res.json())
-        .then(data => renderJuego(data));
+        .then(data => {
+            renderJuego(data);
+            if(localStorage.Partida){
+                estatPartida = JSON.parse(localStorage.getItem("Partida"));
+                actualizarMarcador();
+            }
+        });
 });
