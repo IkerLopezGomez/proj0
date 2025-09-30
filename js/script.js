@@ -1,11 +1,19 @@
 let estatPartida = {
     contadorPreguntas: 0,
-    respostesUsuari: []
+    respostesUsuari: [],
+    temps: 0
 };
+window.addEventListener('DOMContentLoaded', () => {
+    setInterval(function(){
+        estatPartida.temps++;
+        actualizarMarcador();
+    }, 1000);
+});
 
 function actualizarMarcador() {
     let marcador = document.getElementById("marcador");
-    let htmlString = `Pregunta ${estatPartida.contadorPreguntas + 1}<br>`;
+    let htmlString = `Tiempo: ${estatPartida.temps}<br>`;
+    htmlString += `Pregunta ${estatPartida.contadorPreguntas + 1}<br>`;
     for (let i = 0; i < estatPartida.respostesUsuari.length; i++) {
         htmlString += `Pregunta ${i + 1} : <span class='badge text-bg-primary'>
         ${(estatPartida.respostesUsuari[i] ? "X" : "O")}</span><br>`;
