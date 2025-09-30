@@ -3,8 +3,11 @@ let estatPartida = {
     respostesUsuari: [],
     temps: 0
 };
+
+let temporizador = null;
+
 window.addEventListener('DOMContentLoaded', () => {
-    setInterval(function(){
+    temporizador = setInterval(function(){
         estatPartida.temps++;
         actualizarMarcador();
     }, 1000);
@@ -85,14 +88,38 @@ function renderJuego(data) {
             body: JSON.stringify({ respuestas: estatPartida.respostesUsuari })
         })
             .then(res => res.json())
-            .then(res => console.log(res));
+            .then(res => {
+                if (res.status === "ok") {
+                    let correctas = res.resultados.filter(r => r.acertada).length;
+                    clearInterval(temporizador);
+                    temporizador = null;
+                    marcador.innerHTML = `Has acertado ${correctas} de 10 preguntas`;
+                    res.resultados.forEach(r => {
+                        const btnsPregunta = document.querySelectorAll(`[preg="${r.idPregunta - 1}"]`);
+                        btnsPregunta.forEach((btn, i) => {
+                            if (i === r.idRespuestaUsuario) {
+                                btn.classList.remove("btn-outline-secondary");
+                                btn.classList.add(r.acertada ? "btn-success" : "btn-danger");
+                                btn.classList.add("fw-bold");
+                            }
+                            
+                            if (i === r.idRespuestaCorrecta) {
+                                btn.classList.add ("btn-success");
+                                btn.classList.add("fw-bold");
+                                btn.classList.add("text-white");
+                            }
+                        });
+                    });
+                };
+            });
             estatPartida.contadorPreguntas = 0;
             estatPartida.respostesUsuari = [];
             estatPartida.temps = 0;
             actualizarMarcador();
             document.getElementById("btnEnviar").style.display = "none";
+            let marcador = document.getElementById("marcador");
     });
-}
+};
 
 window.addEventListener('DOMContentLoaded', () => {
     fetch('php/getPregunta.php')

@@ -24,7 +24,7 @@ foreach($respuestasUsuari as $r){
 
     $resultats[] = [
         "idPregunta" => $idPregunta,
-        "idRespouestaUsuario" => $idRespuesta,
+        "idRespuestaUsuario" => $idRespuesta,
         "idRespuestaCorrecta" => $correcta,
         "acertada" => ($idRespuesta == $correcta)
     ];
