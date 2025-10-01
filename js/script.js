@@ -7,13 +7,6 @@ export function iniciarCuestionario() {
 
 let temporizador = null;
 
-window.addEventListener('DOMContentLoaded', () => {
-    temporizador = setInterval(function(){
-        estatPartida.temps++;
-        actualizarMarcador();
-    }, 1000);
-});
-
 function actualizarMarcador() {
     let marcador = document.getElementById("marcador");
     let minutos = Math.floor(estatPartida.temps / 60);
@@ -43,11 +36,6 @@ function marcarRespuesta(numPregunta, numRespuesta, data) {
         idPregunta: parseInt(data.preguntas[numPregunta].idPregunta),
         idRespuesta: parseInt(numRespuesta)
     };
-
-    if (estatPartida.contadorPreguntas == 10) {
-        document.getElementById("btnEnviar").style.display = "block";
-    }
-
     actualizarMarcador();
 }
 
@@ -98,7 +86,8 @@ function renderJuego(data) {
                     let correctas = res.resultados.filter(r => r.acertada).length;
                     clearInterval(temporizador);
                     temporizador = null;
-                    marcador.innerHTML = `Has acertado ${correctas} de 10 preguntas`;
+                    document.getElementById("marcador").innerHTML = `Has acertado ${correctas} de 10 preguntas`;
+                    document.getElementById("marcador").innerHTML += `<button id="btnReinicio" class="btn btn-danger m-auto" style="display:block">Reiniciar Partida</button>`;
                     res.resultados.forEach(r => {
                         const btnsPregunta = document.querySelectorAll(`[preg="${r.idPregunta - 1}"]`);
                         btnsPregunta.forEach((btn, i) => {
@@ -123,7 +112,22 @@ function renderJuego(data) {
             actualizarMarcador();
             document.getElementById("btnEnviar").style.display = "none";
             let marcador = document.getElementById("marcador");
-            localStorage.removeItem("Partida");
+
+    });
+    document.getElementById("btnReinicio").addEventListener("click", () => {
+        localStorage.removeItem("Partida");
+
+        document.getElementById("inicio").style.display = "block";
+        document.getElementById("questionari").style.display = "none";
+        document.getElementById("marcador").style.display = "none";
+
+        estatPartida = {
+            contadorPreguntas: 0,
+            respostesUsuari: [],
+            temps: 0
+        };
+        clearInterval(temporizador);
+        temporizador = null;
     });
 };
 
@@ -137,5 +141,11 @@ window.addEventListener('DOMContentLoaded', () => {
                 actualizarMarcador();
             }
         });
+});
+window.addEventListener('DOMContentLoaded', () => {
+    temporizador = setInterval(function(){
+        estatPartida.temps++;
+        actualizarMarcador();
+    }, 1000);
 });
 }
