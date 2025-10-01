@@ -1,4 +1,5 @@
-let estatPartida = {
+export function iniciarCuestionario() {
+    let estatPartida = {
     contadorPreguntas: 0,
     respostesUsuari: [],
     temps: 0
@@ -137,3 +138,4 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         });
 });
+}
