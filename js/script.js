@@ -116,22 +116,13 @@ function renderJuego(data) {
     });
     document.getElementById("btnReinicio").addEventListener("click", () => {
         localStorage.removeItem("Partida");
-
-        document.getElementById("inicio").style.display = "block";
-        document.getElementById("questionari").style.display = "none";
-        document.getElementById("marcador").style.display = "none";
-
-        estatPartida = {
-            contadorPreguntas: 0,
-            respostesUsuari: [],
-            temps: 0
-        };
-        clearInterval(temporizador);
-        temporizador = null;
+        const script = import ('./inicio.js');
+        script .iniciarPagina();
     });
 };
 
 window.addEventListener('DOMContentLoaded', () => {
+    let contenidor = document.getElementById("questionari");
     fetch('php/getPregunta.php')
         .then(res => res.json())
         .then(data => {
