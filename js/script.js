@@ -99,7 +99,7 @@ function renderJuego(data) {
                     let correctas = res.resultados.filter(r => r.acertada).length;
                     clearInterval(temporizador);
                     temporizador = null;
-                    document.getElementById("marcador").innerHTML = `Has acertado ${correctas} de 10 preguntas`;
+                    document.getElementById("marcador").innerHTML += `<br>Has acertado ${correctas} de 10 preguntas`;
                     res.resultados.forEach(r => {
                         const btnsPregunta = document.querySelectorAll(`[preg="${r.idPregunta - 1}"]`);
                         btnsPregunta.forEach((btn, i) => {
@@ -140,10 +140,9 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         });
 });
-window.addEventListener('DOMContentLoaded', () => {
     temporizador = setInterval(function(){
         estatPartida.temps++;
         actualizarMarcador();
     }, 1000);
-});
+
 }
