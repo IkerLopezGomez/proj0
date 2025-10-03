@@ -6,7 +6,6 @@ export function iniciarCuestionario() {
 };
 
 let temporizador = null;
-
 function actualizarMarcador() {
     let marcador = document.getElementById("marcador");
     let minutos = Math.floor(estatPartida.temps / 60);
@@ -25,6 +24,20 @@ function actualizarMarcador() {
     if(estatPartida.contadorPreguntas >= 10) {
         document.getElementById("btnEnviar").style.display = "block";
     }
+    document.getElementById("marcador").innerHTML = "<button id='btnReinicio' class='btn btn-danger btn-sm mb-2'>Reiniciar Cuestionario</button><br>" + marcador.innerHTML;
+        document.getElementById("btnReinicio").addEventListener("click", () => {
+        localStorage.removeItem("Partida");
+        estatPartida = {
+            contadorPreguntas: 0,
+            respostesUsuari: [],
+            temps: 0
+        };
+        actualizarMarcador();
+        document.getElementById("questionari").innerHTML = "";  
+    import('./inicio.js').then(module => {
+        module.iniciarPagina();
+    });
+    });
 }
 
 function marcarRespuesta(numPregunta, numRespuesta, data) {
@@ -87,7 +100,6 @@ function renderJuego(data) {
                     clearInterval(temporizador);
                     temporizador = null;
                     document.getElementById("marcador").innerHTML = `Has acertado ${correctas} de 10 preguntas`;
-                    document.getElementById("marcador").innerHTML += `<button id="btnReinicio" class="btn btn-danger m-auto" style="display:block">Reiniciar Partida</button>`;
                     res.resultados.forEach(r => {
                         const btnsPregunta = document.querySelectorAll(`[preg="${r.idPregunta - 1}"]`);
                         btnsPregunta.forEach((btn, i) => {
@@ -113,11 +125,6 @@ function renderJuego(data) {
             document.getElementById("btnEnviar").style.display = "none";
             let marcador = document.getElementById("marcador");
 
-    });
-    document.getElementById("btnReinicio").addEventListener("click", () => {
-        localStorage.removeItem("Partida");
-        const script = import ('./inicio.js');
-        script .iniciarPagina();
     });
 };
 
