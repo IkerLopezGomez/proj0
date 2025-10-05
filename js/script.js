@@ -11,7 +11,6 @@ export function iniciarCuestionario() {
         resultadosFinales: null
     };
 
-    // ===== FUNCIONES =====
     function actualizarMarcador() {
         const marcador = document.getElementById("marcador");
         let minutos = Math.floor(estatPartida.temps / 60);
@@ -52,43 +51,38 @@ export function iniciarCuestionario() {
         contenidor.innerHTML += `<h3 class="text-center mb-3">${preg.Pregunta}</h3>`;
         contenidor.innerHTML += `<img src="${preg.imatge}" class="img-fluid d-block mx-auto mb-3" style="max-width:30%;"><br>`;
 
-        // Botones de respuesta
         [preg.Respuesta1, preg.Respuesta2, preg.Respuesta3].forEach((textoResp, j) => {
             contenidor.innerHTML += `<button class="btn btn-outline-secondary btn-sm mb-2 d-block w-50 mx-auto" data-resp="${j}">
                 ${textoResp}</button>`;
         });
 
-        // Botones de navegación
         contenidor.innerHTML += `<div class="d-flex justify-content-center mt-3 gap-2">
-            ${indice > 0 ? '<button id="btnAnterior" class="btn btn-secondary">Anterior</button>' : ''}
-            ${indice < preguntasData.length - 1 ? '<button id="btnSiguiente" class="btn btn-primary">Siguiente</button>' : ''}
-            ${indice === preguntasData.length -1 ? '<button id="btnEnviar" class="btn btn-danger">Finalizar</button>' : ''}
+            ${indice === 0 ? '<button id="btnSiguiente" class="btn btn-primary w-100">Siguiente</button>' : ''}
+            ${indice === preguntasData.length - 1 ? '<button id="btnAnterior" class="btn btn-secondary w-100">Anterior</button>' : ''}
+            ${indice > 0 && indice < preguntasData.length - 1 ? '<button id="btnAnterior" class="btn btn-secondary flex-fill">Anterior</button><button id="btnSiguiente" class="btn btn-primary flex-fill">Siguiente</button>' : ''}
+            ${indice === preguntasData.length -1 ? '<button id="btnEnviar" class="btn btn-danger ms-2">Finalizar</button>' : ''}
         </div>`;
 
         const respuestaPrev = estatPartida.respostesUsuari[indice];
         const botones = contenidor.querySelectorAll('button[data-resp]');
 
-        botones.forEach((btn, j) => {
-            if (!estatPartida.finalizado) {
-                // Antes de enviar → resaltar selección
-                if (respuestaPrev && respuestaPrev.idRespuesta === j) {
-                    btn.classList.add("border-primary");
-                }
-            } else {
-                // Después de enviar → mostrar colores
+        if (!estatPartida.finalizado) {
+            if (respuestaPrev) {
+                botones.forEach(btn => btn.classList.remove("border-primary"));
+                botones[respuestaPrev.idRespuesta].classList.add("border-primary");
+            }
+        } else if (respuestaPrev) {
+            botones.forEach((btn, j) => {
                 btn.disabled = true;
                 btn.classList.remove("btn-outline-secondary");
-
-                // Usando idRespuesta y acertada del PHP
-                if (respuestaPrev && respuestaPrev.idRespuesta === j && respuestaPrev.acertada) {
-                    btn.classList.add("btn-success"); // correcta
+                if (respuestaPrev.idRespuestaCorrecta === j) btn.classList.add("btn-success");
+                if (respuestaPrev.idRespuesta !== respuestaPrev.idRespuestaCorrecta && respuestaPrev.idRespuesta === j) {
+                    btn.classList.add("btn-danger");
                 }
-
-                if (respuestaPrev && respuestaPrev.idRespuesta === j && !respuestaPrev.acertada) {
-                    btn.classList.add("btn-danger"); // incorrecta
-                }
-            }
-        });
+            });
+            const btnEnviar = document.getElementById("btnEnviar");
+            if (btnEnviar) btnEnviar.style.display = "none";
+        }
 
         actualizarMarcador();
     }
@@ -104,31 +98,31 @@ export function iniciarCuestionario() {
             if (res.status === "ok") {
                 estatPartida.resultadosFinales = res.resultados.filter(r => r.acertada).length;
                 estatPartida.finalizado = true;
-
                 if (temporizador) {
                     clearInterval(temporizador);
                     temporizador = null;
                 }
-
-                // Guardar aciertos/fallos
                 res.resultados.forEach(r => {
-                    estatPartida.respostesUsuari[r.idPregunta - 1].acertada = r.acertada;
+                    estatPartida.respostesUsuari[r.idPregunta - 1] = {
+                        idPregunta: r.idPregunta,
+                        idRespuesta: r.idRespuestaUsuario,
+                        idRespuestaCorrecta: r.idRespuestaCorrecta,
+                        acertada: r.acertada
+                    };
                 });
-
-                mostrarPregunta(indicePregunta); // refresca la pregunta actual con colores correctos/incorrectos
+                mostrarPregunta(indicePregunta);
                 actualizarMarcador();
             }
-        });
+        })
+        .catch(err => console.error("Error en enviarResultados:", err));
     }
 
-    // ===== FETCH PREGUNTAS =====
     fetch('php/getPregunta.php')
         .then(res => res.json())
         .then(data => {
-            preguntasData = data.preguntas;
+            preguntasData = data.preguntas || [];
             mostrarPregunta(indicePregunta);
-
-            if (localStorage.Partida) {
+            if (localStorage.getItem("Partida")) {
                 const partidaGuardada = JSON.parse(localStorage.getItem("Partida"));
                 estatPartida = { ...estatPartida, ...partidaGuardada };
                 mostrarPregunta(indicePregunta);
@@ -136,21 +130,14 @@ export function iniciarCuestionario() {
         })
         .catch(err => console.error("Error al obtener preguntas:", err));
 
-    // ===== EVENTOS =====
     document.getElementById("questionari").addEventListener("click", (e) => {
         if (e.target.dataset.resp != null && !estatPartida.finalizado) {
-            // Guardar respuesta
             estatPartida.respostesUsuari[indicePregunta] = {
                 idPregunta: parseInt(preguntasData[indicePregunta].idPregunta),
                 idRespuesta: parseInt(e.target.dataset.resp)
             };
-
-            // Solo borde azul al seleccionar
-            e.target.parentElement.querySelectorAll("button[data-resp]").forEach(btn => {
-                btn.classList.remove("border-primary");
-            });
+            e.target.parentElement.querySelectorAll("button[data-resp]").forEach(btn => btn.classList.remove("border-primary"));
             e.target.classList.add("border-primary");
-
             actualizarMarcador();
         } else if (e.target.id === "btnSiguiente") {
             indicePregunta++;
@@ -163,7 +150,6 @@ export function iniciarCuestionario() {
         }
     });
 
-    // ===== TEMPORIZADOR =====
     if (temporizador) {
         clearInterval(temporizador);
         temporizador = null;
