@@ -1,6 +1,10 @@
 <?php
 require 'conn.php';
-$sql = "SELECT idPregunta, Pregunta, Respuesta1, Respuesta2, Respuesta3, imatge FROM Preguntas";
+
+$sql = "SELECT idPregunta, Pregunta, Respuesta1, Respuesta2, Respuesta3, imatge 
+        FROM Preguntas 
+        LIMIT 10"; 
+
 $result = $conn->query($sql);
 
 $preguntas = [];
