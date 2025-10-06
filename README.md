@@ -1,3 +1,9 @@
+<h1>DIGISOS</h1>
+<h2>Objetivo</h2>
+El objetivo principal de este proyecto es repasar conceptos basicos de html, php y javascript, ademas de agilizar los procesos de programación y aprender nuevos conceptos tales como el localStorage y fetch. Esto tambien esta orientado al ODS numeo 4 ya que ayuda al usuario a aprender cosas nuevas sobre el carne tipo B de conducir
+
+
+
 <h2>Vercel</h2>
 https://proj0-three.vercel.app/
 <img width="1262" height="417" alt="Captura de pantalla de 2025-10-06 11-33-10" src="https://github.com/user-attachments/assets/cb5a2a23-1b97-4ee8-a7a8-21b3adef0056" />
